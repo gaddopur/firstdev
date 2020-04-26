@@ -1,0 +1,49 @@
+{% load static from staticfiles %}
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>Article</title>
+    <link rel="stylesheet" href="{% static 'faltu.css' %}">
+  </head>
+  <body>
+    <header  class="wrapper">
+        <!-- <h2><a href="{% url 'articles:articles_list' %}" class="link">Home</a></h2> -->
+        <nav>
+          <div class="wrapper">
+          <div class="home">
+            <h2><a href="{% url 'articles:articles_list' %}" class="home">Home</a></h2>
+          </div>
+          <div class="large">
+
+          </div>
+          <div class="heighlight">
+              <a href="{% url 'articles:create' %}", class="highlight">New Article</a>
+          </div>
+            {% if user.is_authenticated%}
+            <div class="logout-link">
+              <form class="logout-link" action="{% url 'accounts:logout' %}" method="post">
+                {% csrf_token%}
+                <button type="submit">logout</button>
+              </form>
+            </div>
+            <div class="Profile">
+                <p><a href="{% url 'accounts:profile' username=user.username%}">{{user.username}}</a></p>
+            </div>
+            {% else %}
+            <div class="login-link">
+              <a href="{% url 'accounts:login' %}">login</a>
+            </div>
+            <div class="signup-link">
+              <a href="{% url 'accounts:signup' %}">signup</a>
+            </div>
+            {% endif %}
+          </div>
+        </nav>
+    </header>
+    <div class="wrapper">
+      {% block content %}
+      {% endblock %}
+    </div>
+  </body>
+</html>

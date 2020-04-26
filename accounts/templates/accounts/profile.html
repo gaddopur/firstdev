@@ -1,0 +1,18 @@
+{% extends 'base_layout.html' %}
+
+{% block content %}
+<div class="Profile">
+  <div class="large"></div>
+  <div class="card">
+    <div class="center">
+      <img src="{{Profile.profile_pic.url}}"/>
+    </div>
+    <h1>{{Profile.user.username}}</h1>
+    <h2>Article From</h2>
+
+    <h2>{{Profile.user.first_name}}{{Profile.user.last_name}}</h2>
+    <div><a href="{{Profile.user.email}}">Contact</a> </div>
+  </div>
+  <div class="large"></div>
+</div>
+{% endblock %}
