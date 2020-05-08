@@ -1,7 +1,50 @@
 {% extends 'base_layout.html' %}
 
 {% block content %}
-<div class="Profile">
+<div class="jumbotron jumbotron-fluid text-dark">
+  <div class="container text-center text-center text-dark">
+      <header>
+      <img height="100px" width="100px" src="{{Profile.profile_pic.url}}" alt="user-image">
+      </header>
+      <ul class="side-nav">
+        <li>
+           {{Profile.user.username}}
+        </li>
+        <br/>
+        <li>
+          {{Profile.user.first_name}} {{Profile.user.last_name}}
+        </li>
+        <br/>
+        <li>
+          {{Profile.country}}
+        </li>
+        <br/>
+      </ul>
+      <br/>
+      <hr>
+      <h1 >Article List Of User</h1>
+      <div class="row">
+      {% for article in articles %}
+        <div class="col-md-6 col-lg-4 col-sm-12 ">
+          <div class="card text-center">
+            <div class="card-header">
+              <h6><a href="{% url 'articles:details' slug=article.slug%}" class="text-center text-dark text-nowrap">{{article.title}}</a></h6>
+            </div>
+            <div class="card-body">
+              <p class="text-justify text-dark">{{article.snippet}}</p>
+              <a href="{% url 'accounts:profile' username=article.author.username%}"><p class="text-right text-dark">added by {{article.author.username}}</p></a>
+            </div>
+            <div class="card-footer text-muted">
+              {{article.date}}
+            </div>
+          </div>
+        </div>
+      {% endfor %}
+      </div>
+  </div>
+</div>
+{% endblock %}
+<!-- <div class="Profile">
   <div class="large"></div>
   <div class="card">
     <div class="center">
@@ -14,5 +57,4 @@
     <div><a href="{{Profile.user.email}}">Contact</a> </div>
   </div>
   <div class="large"></div>
-</div>
-{% endblock %}
+</div> -->

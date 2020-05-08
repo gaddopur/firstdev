@@ -1,12 +1,19 @@
 {% extends 'base_layout.html' %}
 
 {% block content %}
-<div class="article-detail">
-  <div class="article">
-    <img src="{{article.thumb.url}}"/>
-    <h2>{{article.title}}</h2>
-    <p>{{article.text}}</p>
-    <p>{{article.date}}</p>
+  <div class="jumbotron jumbotron-fluid">
+    <div class="container border text-dark">
+    <div class="card" style="width: 100%;">
+      <img class="card-image-top" src="{{article.thumb.url}}" alt="Just for fun">
+      <div class="card-body">
+        <h5 class="card-title">{{article.title}}</h5>
+        <p class="card-text">{{article.text}}</p>
+        <a href="{% url 'accounts:profile' username=article.author.username%}"><p class="text-right text-dark">added by {{article.author.username}}</p></a>
+      </div>
+      <div class="card-footer text-muted">
+        {{article.date}}
+      </div>
+    </div>
+    </div>
   </div>
-</div>
 {% endblock %}

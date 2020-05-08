@@ -5,6 +5,7 @@ from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
 from . import forms
 from .models import Profile
+from articles.models import Article
 
 def signup_view(request):
     if request.method == "POST":
@@ -39,15 +40,20 @@ def login_view(request):
                 return redirect("articles:articles_list")
     else:
         form = AuthenticationForm()
-    return render(request, "accounts/login_view.html", {'form':form})
+    return render(request, "accounts/login_view.html", {'form': form})
 
 def logout_views(request):
-    if request.method == "POST":
-        logout(request)
-        return redirect("articles:articles_list")
+    logout(request)
+    return redirect("articles:articles_list")
 
 # @login_required(login_url = "/accounts/login")
 def profile_views(request, username):
     user =  User.objects.get(username=username)
+    articles = Article.objects.filter(author=user).order_by('date')
     profile = Profile.objects.get(user=user)
-    return render(request, "accounts/profile.html", {'Profile':profile})
+    return render(request, "accounts/profile.html",
+            {
+                'Profile': profile,
+                'articles': articles
+            }
+    )

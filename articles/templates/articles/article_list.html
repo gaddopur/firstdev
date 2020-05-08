@@ -1,15 +1,26 @@
 {% extends 'base_layout.html'%}
-
 {% block content %}
-<h1>Article List</h1>
-<div class="articles">
-  {% for article in articles%}
-    <div class="article">
-      <h2><a href="{% url 'articles:details' slug=article.slug%}">{{article.title}}</a></h2>
-      <p>{{article.snippet}}</p>
-      <p>{{article.date}}</p>
-      <p class="author">added by {{article.author.username}}</p>
+<div class="jumbotron jumbotron-fluid">
+  <div class="container text-center text-center text-dark">
+    <h1 >Article List</h1>
+    <div class="row">
+    {% for article in articles %}
+      <div class="col-md-6 col-lg-4 col-sm-12 ">
+        <div class="card text-center">
+          <div class="card-header">
+            <h6><a href="{% url 'articles:details' slug=article.slug%}" class="text-center text-dark text-nowrap">{{article.title}}</a></h6>
+          </div>
+          <div class="card-body">
+            <p class="text-justify text-dark">{{article.snippet}}</p>
+            <a href="{% url 'accounts:profile' username=article.author.username %}"><p class="text-right text-dark">added by {{article.author.username}}</p></a>
+          </div>
+          <div class="card-footer text-muted">
+            {{article.date}}
+          </div>
+        </div>
+      </div>
+    {% endfor %}
     </div>
-  {% endfor %}
+  </div>
 </div>
 {% endblock %}

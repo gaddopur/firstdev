@@ -7,7 +7,7 @@ class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     country = models.CharField(max_length=50, blank=True)
     date = models.DateTimeField(auto_now_add=True)
-    profile_pic = models.ImageField(default="default_profile.jfif", blank=True)
+    profile_pic = models.ImageField(default="default_profile.jpg", blank=True)
 
     def __str__(self):
         return self.user.username
