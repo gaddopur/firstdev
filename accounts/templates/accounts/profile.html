@@ -1,12 +1,16 @@
 {% extends 'base_layout.html' %}
 
 {% block content %}
-<div class="jumbotron jumbotron-fluid text-dark">
   <div class="container text-center text-center text-dark">
-      <header>
-      <img height="100px" width="100px" src="{{Profile.profile_pic.url}}" alt="user-image">
-      </header>
+    <div class="media">
+      <img class="rounded-circle account-img" src="{{Profile.profile_pic.url}}">
+      <div class="media-body">
+        <h2 class="account-heading">{{user.username}}</h2>
+        <!-- <p class="text-secondary">{{ user.email }}</p> -->
+      </div>
+    </div>
       <ul class="side-nav">
+
         <li>
            {{Profile.user.username}}
         </li>
@@ -42,7 +46,7 @@
       {% endfor %}
       </div>
   </div>
-</div>
+
 {% endblock %}
 <!-- <div class="Profile">
   <div class="large"></div>

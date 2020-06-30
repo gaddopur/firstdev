@@ -1,11 +1,10 @@
-<!DOCTYPE html>
-<html lang="en" dir="ltr">
-  <head>
-    <meta charset="utf-8">
-    <title>HomePage</title>
-  </head>
-  <body>
-    <h1>This is HomePage</h1>
-    <p>Welcome to first web</p>
-  </body>
-</html>
+{% extends 'base_layout.html'%}
+{% block content %}
+<main role="main" class="container">
+  <div class="jumbotron">
+    <h1>Welcome to Interview Helper </h1>
+    <p class="lead">This example is a quick exercise to illustrate how fixed to top navbar works. As you scroll, it will remain fixed to the top of your browser's viewport.</p>
+    <a class="btn btn-lg btn-primary" href="../../components/navbar/" role="button">View navbar docs &raquo;</a>
+  </div>
+</main>
+{% endblock %}

@@ -1,19 +1,77 @@
 {% extends 'base_layout.html' %}
-
+{% load staticfiles %}
+{% load humanize %}
+{% load extrafilter %}
+{% load crispy_forms_tags %}
 {% block content %}
-  <div class="jumbotron jumbotron-fluid">
-    <div class="container border text-dark">
-    <div class="card" style="width: 100%;">
-      <img class="card-image-top" src="{{article.thumb.url}}" alt="Just for fun">
-      <div class="card-body">
-        <h5 class="card-title">{{article.title}}</h5>
-        <p class="card-text">{{article.text}}</p>
-        <a href="{% url 'accounts:profile' username=article.author.username%}"><p class="text-right text-dark">added by {{article.author.username}}</p></a>
-      </div>
-      <div class="card-footer text-muted">
-        {{article.date}}
-      </div>
+<div class="container my-3 ">
+  <h2 class="blog-post-title text-center">{{article.title}}</h2>
+  <p >{{article.text|safe|linebreaks}}</p>
+  <p class="blog-post-meta text-center">{{article.date}} Added by
+    <a href="{% url 'accounts:profile' username=article.author.username %}">{{article.author.username}}</a>
+  </p>
+</div>
+<br><hr>
+<div class="container">
+  <h2>Comments ({{comments.count}})</h2>
+  <div class="content-section">
+    <form action="{% url 'articles:comment'%}" method="post">
+        {% csrf_token %}
+        <input type="hidden" name="post_slug" value="{{article.slug}}">
+        <div class="form-group">
+          <label for="comment">Post Comment:</label>
+          <textarea class="form-control" placeholder="Enter Your Comment" name="comment" cols="80" id="id_comment" required="" rows="2" spellcheck="false"></textarea>
+        </div>
+        <div class="form-group">
+            <button class="btn btn-dark float-right" type="submit" value="Post">Post</button>
+        </div>
+    </form>
+  </div>
+ <br>
+  {% for comment in comments %}
+  <div class="row my-3">
+    <div class="col-md-1">
+     <img class="rounded-circle border border-dark w-100" src="{{comment.user.profile.profile_pic.url}}" alt="user">
     </div>
+    <div class="col-md-11">
+      <b>{{comment.user}}</b> <span class="badge badge-secondary">{{comment.date|naturaltime}}</span>
+      <div>
+         {{comment.comment}}
+         <div class="reply mx-0">
+           {% if user.is_authenticated%}
+            <button class="btn btn-sm btn-dark" type="button" data-toggle="collapse" data-target="#comment{{comment.id}}" aria-expanded="false" aria-controls="comment{{comment.id}}">
+              Reply
+            </button>
+            <div class="collapse" id="comment{{comment.id}}">
+              <div class="my-2">
+                <form action="{% url 'articles:comment'%}" method="post">
+                    {% csrf_token %}
+                    <input type="hidden" name="post_slug" value="{{article.slug}}">
+                    <input type="hidden" name="par_id" value="{{comment.id}}">
+                    <div class="form-group">
+                      <label for="comment">Reply:</label>
+                      <textarea class="form-control" placeholder="Reply here" name="comment" cols="80" id="id_comment" required="" rows="2" spellcheck="false"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <button class="btn btn-dark float-right" type="submit" value="Post">Post</button>
+                    </div>
+                </form>
+              </div>
+            </div>
+            {% else %}
+            <button class="btn btn-sm btn-dark disabled" type="button" data-toggle="collapse" data-target="#comment{{comment.id}}" aria-expanded="false" aria-controls="comment{{comment.id}}">
+              Login to reply
+            </button>
+            {% endif %}
+            <div class="replies bg-danger my-2">
+              {% for reply in replyDict|get_key:comment.id %}
+              {{reply}}
+              {%endfor%}
+            </div>
+         </div>
+      </div>
     </div>
   </div>
+  {% endfor %}
+</div>
 {% endblock %}

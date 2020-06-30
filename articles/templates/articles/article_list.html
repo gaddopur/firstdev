@@ -1,26 +1,43 @@
 {% extends 'base_layout.html'%}
+{% load humanize %}
+{% load static from staticfiles %}
+{% block activelis %}active{% endblock%}
 {% block content %}
-<div class="jumbotron jumbotron-fluid">
-  <div class="container text-center text-center text-dark">
-    <h1 >Article List</h1>
-    <div class="row">
-    {% for article in articles %}
-      <div class="col-md-6 col-lg-4 col-sm-12 ">
-        <div class="card text-center">
-          <div class="card-header">
-            <h6><a href="{% url 'articles:details' slug=article.slug%}" class="text-center text-dark text-nowrap">{{article.title}}</a></h6>
-          </div>
-          <div class="card-body">
-            <p class="text-justify text-dark">{{article.snippet}}</p>
-            <a href="{% url 'accounts:profile' username=article.author.username %}"><p class="text-right text-dark">added by {{article.author.username}}</p></a>
-          </div>
-          <div class="card-footer text-muted">
-            {{article.date}}
-          </div>
+<div class="container text-center tex-dark">
+  <h1 >Article List</h1>
+  <br><hr>
+  {% for article in articles %}
+  <div class="row">
+    <div class="col-lg-2"></div>
+    <div class="col-lg-8">
+      <div class="card text-center">
+        <div class="card-body">
+          <h5 class="card-title">{{article.title}}</h5>
+          <div class="card-text preview">
+             {{article.text|truncatechars_html:500|safe}}
+         </div>
+        <p class="card-text my-2"><a href="{% url 'articles:details' slug=article.slug%}" class="btn btn-dark">
+          Continue reading
+        </a></p>
+
+        </div>
+        <a href="{% url 'accounts:profile' username=article.author.username %}">
+        <h6 class="text-dark">
+          added by <span class="badge badge-secondary">{{article.author.username}}</span>
+        </h6>
+        </a>
+        <div class="card-footer text-muted">
+          {{article.date|naturaltime}}
         </div>
       </div>
-    {% endfor %}
+      </div>
+      <div class="col-lg-2"></div>
     </div>
-  </div>
-</div>
+    <br><br>
+    {% endfor %}
+   </div>
+
+
+<script src="{% static "preview.js" %}"></script>
+
 {% endblock %}

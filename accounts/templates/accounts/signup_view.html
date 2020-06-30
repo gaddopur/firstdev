@@ -1,15 +1,17 @@
 {% extends 'base_layout.html' %}
 {% load crispy_forms_tags %}
+{% block activesig %}active{% endblock%}
 {% block content %}
-<div class="jumbotron jumbotron-fluid text-dark">
   <div class="container text-dark">
     <div class="row justify-content-center text-dark">
       <div class="col-sm-12 col-md-12 col-lg-8 text-dark">
-        <div class="card text-dark" style="width:100%">
+        <div class="content-section">
+          <h1>Sign Up</h1>
+          <hr>
           <form action="/accounts/signup/" method="post" class="text-dark" enctype="multipart/form-data">
             {% csrf_token %}
             <fieldset class="form-group">
-                <legend class="border-bottom mb-4">Sign Up</legend>
+                <!-- <legend class="border-bottom mb-4">Sign Up</legend> -->
                 {{ user_form|crispy}}
                 {{ profile_form|crispy}}
             </fieldset>
@@ -27,7 +29,7 @@
       </div>
     </div>
   </div>
-</div>
+
   <!-- <h1>Signup</h1>
   <form class="site-form" action="/accounts/signup/" method="post" enctype="multipart/form-data">
     {% csrf_token %}
