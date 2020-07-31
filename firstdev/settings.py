@@ -136,5 +136,8 @@ STATICFILES_DIRS = (
 MESSAGE_TAGS = {
     messages.ERROR: 'danger'
 }
+
+AUTH_USER_MODEL = 'accounts.User'
+
 django_heroku.settings(locals())
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
