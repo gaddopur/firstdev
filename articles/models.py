@@ -1,5 +1,4 @@
 from django.contrib.auth.models import User
-from django_comments.models import Comment
 from django.db import models
 from django.urls import reverse
 
