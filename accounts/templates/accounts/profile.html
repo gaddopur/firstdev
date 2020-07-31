@@ -1,52 +1,72 @@
 {% extends 'base_layout.html' %}
 
 {% block content %}
-  <div class="container text-center text-center text-dark">
-    <div class="media">
-      <img class="rounded-circle account-img" src="{{Profile.profile_pic.url}}">
-      <div class="media-body">
-        <h2 class="account-heading">{{user.username}}</h2>
-        <!-- <p class="text-secondary">{{ user.email }}</p> -->
-      </div>
-    </div>
-      <ul class="side-nav">
-
-        <li>
-           {{Profile.user.username}}
-        </li>
-        <br/>
-        <li>
-          {{Profile.user.first_name}} {{Profile.user.last_name}}
-        </li>
-        <br/>
-        <li>
-          {{Profile.country}}
-        </li>
-        <br/>
-      </ul>
-      <br/>
-      <hr>
-      <h1 >Article List Of User</h1>
-      <div class="row">
-      {% for article in articles %}
-        <div class="col-md-6 col-lg-4 col-sm-12 ">
-          <div class="card text-center">
-            <div class="card-header">
-              <h6><a href="{% url 'articles:details' slug=article.slug%}" class="text-center text-dark text-nowrap">{{article.title}}</a></h6>
+<div class="breadcrumb">
+  <a href="{% url 'home'%}">Home</a>
+</div>
+<div class="row m-4">
+  <div class="col-md-6 col border m-1">
+    <div class="content  m-2">
+        <ul class="list-unstyled">
+        <li >
+          <div class="row">
+            <div class="col-sm-3 bg-dark">
+              <img style="hegiht:75px; width:75px;" class="mr-3"
+              src="{{profile.profile_pic.url}}"
+              alt="{{profile.user.username}}">
             </div>
-            <div class="card-body">
-              <p class="text-justify text-dark">{{article.snippet}}</p>
-              <a href="{% url 'accounts:profile' username=article.author.username%}"><p class="text-right text-dark">added by {{article.author.username}}</p></a>
-            </div>
-            <div class="card-footer text-muted">
-              {{article.date}}
+            <div class="col-sm-3">
+                <p class="text-right"><i class="fa fa-cog" aria-hidden="true">setting</i></p>
             </div>
           </div>
-        </div>
-      {% endfor %}
-      </div>
+        </li>
+        <li >
+          <a class="mt-0"
+          href="{% url 'accounts:profile' username=profile.user.username %}">
+          <ins><small>{{profile.user.username}}</small></ins></a>
+        </li>
+        <hr>
+        <li>
+          <!-- <div class="row"> -->
+            <div class="col-sm-5"><strong>Name</strong></div>
+            <div class="col-sm-4">
+              <small>{{profile.first_name}} {{profile.last_name}}</small>
+            </div>
+          <!-- </div> -->
+        </li>
+        <li>
+          <div class="row">
+            <div class="col-sm-5"><strong>Country</strong></div>
+            <div class="col-sm-4">
+              <small>{{profile.country}}</small>
+            </div>
+          </div>
+        </li>
+      </ul>
+    </div>
   </div>
-
+  <div class="col-md-5 col-sm-12 border m-1">
+    <div class="content m-2">
+      <div class="breadcrumb">
+        <h6>Articles</h6>
+      </div>
+      {% if articles|length == 0 %}
+      <ul>
+        <li>You didn't write Article.</li>
+        <li>If you want go to create article page.</li>
+      </ul>
+      <!-- <p class="blockquote-footer">You didn't write Article</p> -->
+      {% endif%}
+      <ul class="">
+        {% for article in articles %}
+        <li>
+          <a href="{{article.get_absolute_url}}"><h5>{{article.title|truncatechars:50}}</h5></a>
+        </li>
+        {% endfor %}
+      </ul>
+    </div>
+  </div>
+</div>
 {% endblock %}
 <!-- <div class="Profile">
   <div class="large"></div>

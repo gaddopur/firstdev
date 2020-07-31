@@ -10,46 +10,65 @@
   <title>{% block head_title %}{% endblock %} Interview Helper</title>
   <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
   <link rel="stylesheet" href="{% static 'css/custom.css' %}">
+  <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" type="text/css" rel="stylesheet">
   <script src="{% static 'tinymce/tinymce.min.js' %}"></script>
 </head>
 <body>
-  <nav class="navbar navbar-expand-md navbar-dark bg-dark mb-4">
-    <a class="navbar-brand font-weight-bold" href="{% url 'home' %}"><i class="fas fa-file"></i> Interview Helper</a>
+  <nav class="navbar navbar-expand-md navbar-dark bg-dark mb-0">
+    <a class="navbar-brand font-weight-bold" href="{% url 'home' %}"> Interview Helper</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarCollapse">
       <ul class="navbar-nav mr-auto">
         <li class="nav-item {% block activelis %}{% endblock%}">
-          <a href="{% url 'articles:articles_list' %}" class="nav-link">Articles</a>
+          <a href="{% url 'articles:articles_list' %}" class="nav-link"><i class="fa fa-file"></i>Articles</a>
         </li>
         <li class="nav-item {% block activenew %}{% endblock%}">
-          <a href="{% url 'articles:create' %}" class="nav-link">New Article</a>
+          <a href="{% url 'articles:create' %}" class="nav-link"><i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+            New Article</a>
         </li>
       </ul>
-      <form class="form-inline mt-2 mt-md-0" action="/search/">
-        <input class="form-control mr-sm-2" type="text" placeholder="Search" name="q" aria-label="Search">
+      <form class="form-inline mt-2 mt-md-0" method="get" action="/search/">
+        <input class="form-control mr-sm-2" type="text" placeholder="Search" name="query" aria-label="Search" id="query">
         <button class="btn  btn-outline-success my-2 my-sm-0" type="submit">Search</button>
       </form>
       <ul class="navbar-nav mt-2 mt-md-0">
         {% if user.is_authenticated %}
         <div class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">{{user.username}}</a>
-          <div class="dropdown-menu bg-dark dropdown-menu-right ">
-            <a href="{% url 'accounts:profile' username=user.username%}" class="dropdown-item text-white">{{user.username}}</a>
+          <a class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+            <img style="hegiht:30px; width:30px;"
+             src="{{user.profile.profile_pic.url}}" alt="{{user.username}}">
+          </a>
+          <div class="dropdown-menu dropdown-menu-right ">
+            <a href="{% url 'accounts:profile' username=user.username%}" class="dropdown-item">
+              {{user.username}}
+            </a>
             <div class="dropdown-divider"></div>
-            <a href="{% url 'accounts:logout' %}" class="dropdown-item font-weight text-white">Log Out</a>
+            <a href="{% url 'accounts:logout' %}" class="dropdown-item">Log Out</a>
           </div>
         </div>
         {% else %}
-        <li class="nav-item {% block activelog %}{% endblock%}"><a href="{% url 'accounts:login'%}" class="nav-link">Log In</a></li>
+        <li class="nav-item {% block activelog %}{% endblock%}">
+          <a href="{% url 'accounts:login'%}" class="nav-link" >Log In</a>
+        </li>
         <li class="nav-item {% block activesig %}{% endblock%}"><a href="{% url 'accounts:signup'%}" class="nav-link">Sign Up</a></li>
         {% endif %}
       </ul>
     </div>
   </nav>
-  {% block content %}
-  {% endblock %}
+  {% for message in messages %}
+  <div class="alert alert-{{message.tags}} alert-dismissible fade show mb-0" role="alert">
+    <strong>Message: </strong> {{message}}
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  {% endfor %}
+  <div class="container my-3">
+    {% block content %}
+    {% endblock %}
+  </div>
   <br><br><br><br>
   <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
   <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>

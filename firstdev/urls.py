@@ -10,6 +10,7 @@ from .import views
 urlpatterns = [
     path('admin/', admin.site.urls),
     url(r'^about/$', views.about),
+    url(r'^search/$', views.search),
     url(r'^articles/', include('articles.urls')),
     url(r'^accounts/', include('accounts.urls')),
     url(r'^tinymce/', include('tinymce.urls')),

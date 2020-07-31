@@ -6,6 +6,7 @@ from django.contrib.auth.decorators import login_required
 from . import forms
 from .models import Profile
 from articles.models import Article
+from django.contrib import messages
 
 def signup_view(request):
     if request.method == "POST":
@@ -17,8 +18,11 @@ def signup_view(request):
             profile.user = user
             user.save()
             profile.save()
+            print("Hello Signup")
+            print(profile.first_name)
             login(request, user)
-            return render(request, 'accounts/profile.html', {'Profile':profile})
+            messages.success(request, "You Signup successfully")
+            return render(request, 'accounts/profile.html', {'profile':profile})
     else :
         user_form = forms.UserForm()
         profile_form = forms.ProfileForm()
@@ -34,16 +38,21 @@ def login_view(request):
         if(form.is_valid()):
             user = form.get_user()
             login(request, user)
+            messages.success(request, "You logged in successfully")
             if "next" in request.POST:
                 return redirect(request.POST.get('next'))
             else:
                 return redirect("articles:articles_list")
+        else:
+            messages.error(request, "Please enter valid username and passaword")
+
     else:
         form = AuthenticationForm()
     return render(request, "accounts/login_view.html", {'form': form})
 
 def logout_views(request):
     logout(request)
+    messages.success(request, "You logged out")
     return redirect("articles:articles_list")
 
 # @login_required(login_url = "/accounts/login")
@@ -53,7 +62,7 @@ def profile_views(request, username):
     profile = Profile.objects.get(user=user)
     return render(request, "accounts/profile.html",
             {
-                'Profile': profile,
+                'profile': profile,
                 'articles': articles
             }
     )

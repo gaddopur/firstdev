@@ -1,14 +1,25 @@
 {% extends 'base_layout.html'%}
 {% load humanize %}
 {% load static from staticfiles %}
-{% block activelis %}active{% endblock%}
+
 {% block content %}
-<div class="container text-center tex-dark">
-  <h1 >Article List</h1>
+<div class="container tex-dark">
+  <h1 >Search Result: </h1>
   <br>
+  {% if articles|length < 1 %}
+  <p>No search result found </p>
+  Your search query: <b>{{query}}</b> did not match to any Article's content or title<br>
+  Suggestions:
+  <ul>
+    <li>Try different keywords</li>
+    {% if large %}
+    <li>Try fewer Keywords </li>
+    {% endif %}
+  </ul>
+  {% endif %}
   {% for article in articles %}
   <div class="row">
-    <div class="col-lg"></div>
+    <div class="col-lg-2"></div>
     <div class="col-lg-8">
       <div class="card text-center">
         <div class="card-body">
@@ -30,7 +41,7 @@
         </div>
       </div>
       </div>
-      <div class="col-lg"></div>
+      <div class="col-lg-2"></div>
     </div>
     <br><br>
     {% endfor %}

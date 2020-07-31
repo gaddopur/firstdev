@@ -10,6 +10,8 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/2.2/ref/settings/
 """
 import os
+from django.contrib.messages import constants as messages
+
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -32,15 +34,18 @@ ALLOWED_HOSTS = []
 INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
+    'django.contrib.sites',
+    'django_comments',
     'django.contrib.contenttypes',
-    'django.contrib.sessions',
-    'django.contrib.messages',
-    'django.contrib.staticfiles',
     'django.contrib.humanize',
+    'django.contrib.messages',
+    'django.contrib.sessions',
+    'django.contrib.staticfiles',
     'articles',
     'accounts',
     'crispy_forms',
-    'tinymce'
+    'mptt',
+    'tinymce',
 ]
 
 MIDDLEWARE = [
@@ -133,3 +138,11 @@ STATIC_ROOT = os.path.join(BASE_DIR, "static", "static_root")
 STATICFILES_DIRS = (
     os.path.join(BASE_DIR, "static", "static_files"),
 )
+
+MESSAGE_TAGS = {
+    messages.ERROR: 'danger'
+}
+
+COMMENTS_APP = 'articles'
+
+# COMMENTS_APP = 'django_comments_xtd'
