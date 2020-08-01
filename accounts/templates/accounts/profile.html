@@ -1,21 +1,18 @@
 {% extends 'base_layout.html' %}
 
 {% block content %}
-<div class="breadcrumb">
-  <a href="{% url 'home'%}">Home</a>
-</div>
 <div class="row m-4">
-  <div class="col-md-6 col border m-1">
+  <div class="col-md-6 col-12 border m-1">
     <div class="content  m-2">
         <ul class="list-unstyled">
         <li >
           <div class="row">
-            <div class="col-sm-3">
+            <div class="col-8">
               <img style="hegiht:75px; width:75px;" class="mr-3"
               src="{{profile.profile_pic.url}}"
               alt="{{profile.user.username}}">
             </div>
-            <div class="col-sm-3">
+            <div class="col-4">
                 <p class="text-right"><i class="fa fa-cog" aria-hidden="true">setting</i></p>
             </div>
           </div>
@@ -28,16 +25,16 @@
         <hr>
         <li>
           <div class="row">
-            <div class="col-sm-6"><strong>Name</strong></div>
-            <div class="col-sm-4">
+            <div class="col-6"><strong>Name:</strong></div>
+            <div class="col-6 text-right">
               <small>{{profile.first_name}} {{profile.last_name}}</small>
             </div>
           </div>
         </li>
         <li>
           <div class="row">
-            <div class="col-sm-6"><strong>Country</strong></div>
-            <div class="col-sm-4">
+            <div class="col-8"><strong>Country:</strong></div>
+            <div class="col-4">
               <small>{{profile.country}}</small>
             </div>
           </div>
@@ -45,7 +42,7 @@
       </ul>
     </div>
   </div>
-  <div class="col-md-5 col-sm-12 border m-1">
+  <div class="col-md-5 col-12 border m-1">
     <div class="content m-2">
       <div class="breadcrumb">
         <h6>Articles</h6>

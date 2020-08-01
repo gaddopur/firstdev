@@ -22,3 +22,22 @@ a:visited {
 a:hover {
   text-decoration: none;
 }
+
+.custom-link:link {
+color: green;
+}
+
+/* visited link */
+.custom-link:visited {
+color: red;
+}
+
+/* mouse over link */
+.custom-link:hover {
+color: red;
+}
+
+/* selected link */
+.custom-link:active {
+color: yellow;
+}

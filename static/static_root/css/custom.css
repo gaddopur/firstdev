@@ -6,23 +6,11 @@
   -ms-user-select: none;
   user-select: none;
 }
-.background-img-thumb{
-  width:100px;
-  height:100px;
-  margin-left: auto;
-  margin-right: auto;
-  background-image: url({% static 'img/default.png'%});
-  background-size:cover;
-  background-position:center;
-}
+
 @media (min-width: 768px) {
   .bd-placeholder-img-lg {
     font-size: 3.5rem;
   }
-}
-.pull-right{
-  right:0;
-  position: absolute;
 }
 
 a:link {
@@ -33,4 +21,61 @@ a:visited {
 }
 a:hover {
   text-decoration: none;
+}
+
+.custom-link1:link {
+color: green;
+}
+
+/* visited link */
+.custom-link1:visited {
+color: red;
+}
+
+/* mouse over link */
+.custom-link1:hover {
+color: blue;
+}
+
+/* selected link */
+.custom-link1:active {
+color: yellow;
+}
+
+.custom-link3:link {
+color: green;
+}
+
+/* visited link */
+.custom-link3:visited {
+color: green;
+}
+
+/* mouse over link */
+.custom-link3:hover {
+color: blue;
+}
+
+/* selected link */
+.custom-link3:active {
+color: yellow;
+}
+
+.custom-link2:link {
+color: green;
+}
+
+/* visited link */
+.custom-link2:visited {
+color: yellow;
+}
+
+/* mouse over link */
+.custom-link2:hover {
+color: blue;
+}
+
+/* selected link */
+.custom-link2:active {
+color: yellow;
 }

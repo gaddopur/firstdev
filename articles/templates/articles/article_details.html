@@ -8,6 +8,7 @@
 
 <div class="container my-3 ">
   <h2 class="blog-post-title text-center">{{article.title}}</h2>
+  <hr>
   <div>{{article.text|safe}}</div>
   <p class="blockquote-footer text-center muted">{{article.date}} <br>Added by:
     <a href="{% url 'accounts:profile' username=article.author.username %}" class="badge badge-secondary">
@@ -32,14 +33,13 @@
         </div>
     </form>
   </div>
- <br>
-
+ <br><br>
 {% for comment in comments %}
-  <div class="row my-3" style="margin-left:{{comment.height}}px;">
-      <div class="col-md-1">
-       <img class="rounded-circle border border-dark w-100" src="{{comment.user.profile.profile_pic.url}}" alt="user">
+  <div class="row my-1" style="margin-left:{{comment.height}}px;">
+      <div class="col-2 col-md-1">
+       <img class="border border-dark w-100" src="{{comment.user.profile.profile_pic.url}}" alt="user">
       </div>
-      <div class="col-md-11">
+      <div class="col-10 col-md-11">
         <b>{{comment.user}}</b> <span class="badge badge-secondary">{{comment.date|naturaltime}}</span>
         <div>
            {{comment.comment}}
@@ -48,7 +48,7 @@
                 Reply
               </button>
               <div class="collapse" id="comment{{comment.id}}">
-                <div class="my-2">
+                <div class="my-1">
                   <form action="{% url 'articles:comment'%}" method="post">
                       {% csrf_token %}
                       <input type="hidden" name="post_slug" value="{{article.slug}}">

@@ -5,17 +5,19 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <meta name="description" content="">
-  <!-- <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors"> -->
   <meta name="generator" content="Jekyll v3.8.6">
   <title>{% block head_title %}{% endblock %} Interview Helper</title>
+    <link rel="stylesheet" href="{% static 'css/custom.css' %}">
   <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
-  <link rel="stylesheet" href="{% static 'css/custom.css' %}">
   <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" type="text/css" rel="stylesheet">
   <script src="{% static 'tinymce/tinymce.min.js' %}"></script>
 </head>
+<style media="screen">
+
+</style>
 <body>
   <nav class="navbar navbar-expand-md navbar-dark bg-dark mb-0">
-    <a class="navbar-brand font-weight-bold" href="{% url 'home' %}"> Interview Helper</a>
+    <a class="navbar-brand font-weight-bold" href="{% url 'home' %}"><i class="fa fa-home" aria-hidden="true"></i> Interview Helper</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
@@ -56,6 +58,19 @@
         {% endif %}
       </ul>
     </div>
+  </nav>
+  <nav style="background-color:#e9ecef;" class="mx-3" >
+    <ul class=" navbar mx-auto list-unstyled" >
+      <li class="nav-item"><a class="custom-link" href="{% url 'home'%}">
+        <i class="fa fa-home" aria-hidden="true"></i>Home</a>
+      </li>
+      <li class="nav-item"><a class="custom-link" href="{% url 'articles:articles_list'%}">
+        <i class="fa fa-file" aria-hidden="true"></i>Articles</a>
+      </li>
+      <li class="nav-item"><a class="custom-link" href="{% url 'articles:create'%}">
+        <i class="fa fa-pencil-square-o" aria-hidden="true"></i>New Article</a>
+      </li>
+    </ul>
   </nav>
   {% for message in messages %}
   <div class="alert alert-{{message.tags}} alert-dismissible fade show mb-0" role="alert">
