@@ -51,9 +51,11 @@ def login_view(request):
     return render(request, "accounts/login_view.html", {'form': form})
 
 def logout_views(request):
+    prev = request.META.get('HTTP_REFERER')
     logout(request)
     messages.success(request, "You logged out")
-    return redirect("articles:articles_list")
+    return redirect(prev)
+    # return redirect("articles:articles_list")
 
 # @login_required(login_url = "/accounts/login")
 def profile_views(request, username):
