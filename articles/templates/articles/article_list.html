@@ -14,7 +14,7 @@
       <div class="card text-center">
         <div class="card-body">
           <h5 class="card-title">{{article.title}}</h5>
-          <div class="card-text preview">
+          <div class="card-text preview" style="overflow:auto; height:100%; width:100%;">
              {{article.text|truncatechars_html:500|safe}}
          </div>
         <p class="card-text my-2"><a href="{% url 'articles:details' slug=article.slug%}" class="btn btn-dark">
