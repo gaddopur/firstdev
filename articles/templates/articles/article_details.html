@@ -9,7 +9,7 @@
 <div class="container my-3 ">
   <h2 class="blog-post-title text-center">{{article.title}}</h2>
   <hr>
-  <div>{{article.text|safe}}</div>
+  <div style="overflow:auto">{{article.text|safe}}</div>
   <p class="blockquote-footer text-center muted">{{article.date}} <br>Added by:
     <a href="{% url 'accounts:profile' username=article.author.username %}" class="badge badge-secondary">
       {{article.author.username}}
