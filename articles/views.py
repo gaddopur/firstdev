@@ -17,7 +17,7 @@ def article_list(request):
 @login_required(login_url = "/accounts/login")
 def postcomment(request):
     if request.method == "POST":
-        
+
         comment = forms.CommentForm(request.POST)
         if comment.is_valid():
             instance = comment.save(commit=False)
@@ -50,7 +50,7 @@ def article_details(request, slug):
     template = 'articles/article_details.html'
     return render(request, template, context)
 
-
+@login_required(login_url = "/accounts/login")
 def article_create(request):
     if request.method == "POST":
         form = forms.CreateArticle(request.POST, request.FILES)
