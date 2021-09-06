@@ -1,30 +1,20 @@
 {% extends 'base_layout.html'%}
 {% load humanize %}
 {% load static%}
-
+{% block activelis %}active{% endblock%}
 {% block content %}
-<div class="container tex-dark">
-  <h1 >Search Result: </h1>
+<div class="container text-center tex-dark">
+  <h1 >Articles</h1>
+  <hr>
   <br>
-  {% if articles|length < 1 %}
-  <p>No search result found </p>
-  Your search query: <b>{{query}}</b> did not match to any Article's content or title<br>
-  Suggestions:
-  <ul>
-    <li>Try different keywords</li>
-    {% if large %}
-    <li>Try fewer Keywords </li>
-    {% endif %}
-  </ul>
-  {% endif %}
   {% for article in articles %}
   <div class="row">
-    <div class="col-lg-2"></div>
+    <div class="col-lg"></div>
     <div class="col-lg-8">
       <div class="card text-center">
         <div class="card-body">
           <h5 class="card-title">{{article.title}}</h5>
-          <div class="card-text preview">
+          <div class="card-text preview" style="overflow:auto; height:100%; width:100%;">
              {{article.text|truncatechars_html:500|safe}}
          </div>
         <p class="card-text my-2"><a href="{% url 'articles:details' slug=article.slug%}" class="btn btn-dark">
@@ -41,7 +31,7 @@
         </div>
       </div>
       </div>
-      <div class="col-lg-2"></div>
+      <div class="col-lg"></div>
     </div>
     <br><br>
     {% endfor %}

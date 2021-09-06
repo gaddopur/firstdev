@@ -48,7 +48,6 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'whitenoise.middleware.WhiteNoiseMiddleware',
-
 ]
 
 
@@ -126,18 +125,26 @@ MEDIA_URL = '/media/'
 
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
-MEDIA_ROOT = os.path.join(BASE_DIR, "static", "media")
-STATIC_ROOT = os.path.join(BASE_DIR, "static", "static_root")
+MEDIA_ROOT = "C:/Users/sa966/OneDrive/Desktop/projects/media/djangoblog"
+STATIC_ROOT = "C:/Users/sa966/OneDrive/Desktop/projects/static/djangoblog"
 
-STATICFILES_DIRS = (
+STATICFILES_DIRS = [
     os.path.join(BASE_DIR, "static", "static_root"),
-)
+]
 
 MESSAGE_TAGS = {
     messages.ERROR: 'danger'
 }
 
-# AUTH_USER_MODEL = 'accounts.User'
+# user model
+AUTH_USER_MODEL = 'accounts.CustomUser'
+
+# Email
+EMAIL_HOST = 'smtp.gmail.com' # os.environ.get("EMAIL_HOST")
+EMAIL_USE_TLS = True # os.environ.get("EMAIL_USE_TLS")
+EMAIL_HOST_USER = 'codeforces221405@gmail.com' # os.environ.get("EMAIL_HOST_USER")
+EMAIL_HOST_PASSWORD = 'pcVAeA*#$442' # os.environ.get("EMAIL_HOST_PASSWORD")
+EMAIL_PORT = 587 # os.environ.get("EMAIL_PORT")
 
 django_heroku.settings(locals())
-STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+# STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'

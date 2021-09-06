@@ -1,0 +1,59 @@
+{% extends 'base_layout.html' %}
+
+{% block content %}
+<div class="row m-4">
+  <div class="col-md-6 col-12 border m-1">
+    <div class="content  m-2">
+        <ul class="list-unstyled">
+        <li >
+          <div class="row">
+            <div class="col-6"><strong>Email:</strong></div>
+            <div class="col-6 ">
+              <small>{{profile.email}}</small>
+            </div>
+          </div>
+        </li>
+        <hr>
+        <li>
+          <div class="row">
+            <div class="col-6"><strong>Name:</strong></div>
+            <div class="col-6 ">
+              <small>{{profile.name}}</small>
+            </div>
+          </div>
+        </li>
+        <!-- <li>
+          <div class="row">
+            <div class="col-6"><strong>Country:</strong></div>
+            <div class="col-6 ">
+              <small>{{profile.country}}</small>
+            </div>
+          </div>
+        </li> -->
+      </ul>
+    </div>
+  </div>
+  <div class="col-md-5 col-12 border m-1">
+    <div class="content m-2">
+      <div class="breadcrumb">
+        <h6>Articles</h6>
+      </div>
+      {% if articles|length == 0 %}
+      <ul>
+        <li>You haven't written any article.</li>
+        <li>Create <a href="{% url 'articles:create' %}">
+          New Article</a></li>
+      </ul>
+      <!-- <p class="blockquote-footer">You didn't write Article</p> -->
+      {% endif%}
+      <ul class="">
+        {% for article in articles %}
+        <li>
+          <a href="{{article.get_absolute_url}}"><h5>{{article.title|truncatechars:50}}</h5></a>
+        </li>
+        {% endfor %}
+      </ul>
+    </div>
+  </div>
+</div>
+{% endblock %}

@@ -1,4 +1,4 @@
-{% load staticfiles %}
+<!-- {% load static %} -->
 <!doctype html>
 <html lang="en">
   <head>
@@ -39,12 +39,11 @@
         {% if user.is_authenticated %}
         <div class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
-            <img style="hegiht:30px; width:30px;"
-             src="{{user.profile.profile_pic.url}}" alt="{{user.username}}">
+            <span><i class="fa fa-user"></i></span>
           </a>
           <div class="dropdown-menu dropdown-menu-right ">
-            <a href="{% url 'accounts:profile' username=user.username%}" class="dropdown-item">
-              {{user.username}}
+            <a href="{% url 'accounts:profile' email=user.email%}" class="dropdown-item">
+              {{user.name}}
             </a>
             <div class="dropdown-divider"></div>
             <a href="{% url 'accounts:logout' %}" class="dropdown-item">Log Out</a>
@@ -59,7 +58,7 @@
       </ul>
     </div>
   </nav>
-  <nav style="background-color:#e9ecef;" class="mx-3" >
+  <!-- <nav style="background-color:#e9ecef;" class="mx-3" >
     <ul class=" navbar mx-auto list-unstyled" >
       <li class="nav-item"><a class="custom-link" href="{% url 'home'%}">
         <i class="fa fa-home" aria-hidden="true"></i>Home</a>
@@ -71,7 +70,7 @@
         <i class="fa fa-pencil-square-o" aria-hidden="true"></i>New Article</a>
       </li>
     </ul>
-  </nav>
+  </nav> -->
   {% for message in messages %}
   <div class="alert alert-{{message.tags}} alert-dismissible fade show mb-0" role="alert">
     <strong>Message: </strong> {{message}}

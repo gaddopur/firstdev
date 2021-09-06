@@ -17,6 +17,13 @@ urlpatterns = [
     url(r'^$', views.home, name="home"),
 ]
 
+# if settings.DEBUG:
+    # print('hello')
+    # urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
+    # urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
-urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
-urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+#     thing = static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
+    # print("this the start of first print", thing, type(thing[0])
+    # print("this is the start of second print", thing[0].pattern)
+    # print("this is third print", dir(thing[0]))
+# print(urlpatterns[1], type(ulrpatterns[1]))

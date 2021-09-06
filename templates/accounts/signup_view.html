@@ -1,0 +1,30 @@
+{% extends 'base_layout.html' %}
+{% load crispy_forms_tags %}
+{% block activesig %}active{% endblock%}
+{% block content %}
+  <div class="container text-dark">
+    <div class="row justify-content-center text-dark">
+      <div class="col-sm-12 col-md-12 col-lg-8 text-dark">
+        <div class="content-section">
+          <h1>Sign Up</h1>
+          <hr>
+          <form action="/accounts/signup/" method="post" class="text-dark" enctype="multipart/form-data">
+            {% csrf_token %}
+            <fieldset class="form-group">
+                {{ user_form|crispy}}
+            </fieldset>
+              <div class="form-group">
+                <button class="btn  btn-outline-success" type="submit" value="signup">Sign Up</button>
+              </div>
+          </form>
+          <div class="border-top pt-3 ">
+              <small class="text-muted">
+                  Alerady An Account?
+              </small>
+              <a class="ml-2 text-dark" href="{% url 'accounts:login' %}">Log In</a>
+          </div>
+          </div>
+      </div>
+    </div>
+  </div>
+{% endblock%}

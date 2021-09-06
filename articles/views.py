@@ -53,7 +53,7 @@ def article_details(request, slug):
 @login_required(login_url = "/accounts/login")
 def article_create(request):
     if request.method == "POST":
-        form = forms.CreateArticle(request.POST, request.FILES)
+        form = forms.CreateArticle(request.POST)
         if form.is_valid():
             instance = form.save(commit=False)
             instance.author = request.user
@@ -62,4 +62,31 @@ def article_create(request):
             return redirect("articles:articles_list")
     else:
         form = forms.CreateArticle()
-    return render(request, "articles/article_create.html", {'form':form})
+    return render(request, "articles/article_create.html", 
+                {'form':form, 'type': "Create"})
+
+
+@login_required(login_url = "/accounts/login")
+def article_update(request, slug):
+    instance = Article.objects.get(slug=slug)
+    
+    if request.user != instance.author:
+        return redirect("articles:articles_list")
+
+    if request.method == "POST":
+        form = forms.CreateArticle(request.POST, instance=instance)
+        if form.is_valid():
+            form.save()
+            return redirect("articles:articles_list")
+    else:
+        form = forms.CreateArticle(instance=instance)
+        return render(request, "articles/article_create.html", 
+                        {'form':form, 'type': "Update"})
+
+
+@login_required(login_url = "/accounts/login")
+def article_delete(request, slug):
+    instance = Article.objects.get(slug=slug)
+    if request.user == instance.author:
+        instance.delete()
+    return redirect("articles:articles_list")
