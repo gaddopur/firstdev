@@ -125,9 +125,6 @@ MEDIA_URL = '/media/'
 
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
-MEDIA_ROOT = "C:/Users/sa966/OneDrive/Desktop/projects/media/djangoblog"
-STATIC_ROOT = "C:/Users/sa966/OneDrive/Desktop/projects/static/djangoblog"
-
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, "static", "static_root"),
 ]
