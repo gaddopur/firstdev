@@ -26,7 +26,7 @@ ALLOWED_HOSTS = []
 INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
-    # 'django.contrib.sites',
+    'django.contrib.sites',
     'django.contrib.contenttypes',
     'django.contrib.humanize',
     'django.contrib.messages',
@@ -144,4 +144,4 @@ EMAIL_HOST_PASSWORD = 'pcVAeA*#$442' # os.environ.get("EMAIL_HOST_PASSWORD")
 EMAIL_PORT = 587 # os.environ.get("EMAIL_PORT")
 
 django_heroku.settings(locals())
-# STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
