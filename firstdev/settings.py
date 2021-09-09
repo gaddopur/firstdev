@@ -37,7 +37,6 @@ INSTALLED_APPS = [
     'crispy_forms',
     'mptt',
     'tinymce',
-    'testapp',
 ]
 
 MIDDLEWARE = [
