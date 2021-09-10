@@ -18,7 +18,7 @@ SECRET_KEY = '(a2!(=3rx+b%^@^(e#c&7qy@e30vwppdo72y3sve7ba8^mw&)0'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['gaddopurblog.herokuapp.com', 'localhost', '127.0.0.1', '0.0.0.0']
 
 
 # Application definition
@@ -26,7 +26,6 @@ ALLOWED_HOSTS = []
 INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
-    'django.contrib.sites',
     'django.contrib.contenttypes',
     'django.contrib.humanize',
     'django.contrib.messages',
@@ -35,7 +34,6 @@ INSTALLED_APPS = [
     'articles',
     'accounts',
     'crispy_forms',
-    'mptt',
     'tinymce',
 ]
 
@@ -81,18 +79,6 @@ DATABASES = {
         'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
     }
 }
-
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-#         'NAME': 'Blog',
-#         'USER': 'gaddopur',
-#         'PASSWORD': 'pcVAeA*',
-#         'HOST': 'localhost',
-#         'PORT': 'PORT_NUMBER',
-#     }
-# }
-
 
 # Password validation
 # https://docs.djangoproject.com/en/2.2/ref/settings/#auth-password-validators
