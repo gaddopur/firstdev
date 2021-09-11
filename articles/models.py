@@ -2,9 +2,6 @@ from django.contrib.auth import get_user_model
 from django.db import models
 from django.urls import reverse
 
-from mptt.models import MPTTModel, TreeForeignKey
-from tinymce.models import HTMLField
-
 CustomUser = get_user_model()
 
 class Article(models.Model):
