@@ -13,7 +13,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # See https://docs.djangoproject.com/en/2.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = '(a2!(=3rx+b%^@^(e#c&7qy@e30vwppdo72y3sve7ba8^mw&)0'
+SECRET_KEY = os.environ.get("SECRET_KEY")
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -134,11 +134,11 @@ MESSAGE_TAGS = {
 AUTH_USER_MODEL = 'accounts.CustomUser'
 
 # Email
-EMAIL_HOST = 'smtp.gmail.com' # os.environ.get("EMAIL_HOST")
-EMAIL_USE_TLS = True # os.environ.get("EMAIL_USE_TLS")
-EMAIL_HOST_USER = 'codeforces221405@gmail.com' # os.environ.get("EMAIL_HOST_USER")
-EMAIL_HOST_PASSWORD = 'rerwjllqphaubvug' # os.environ.get("EMAIL_HOST_PASSWORD")
-EMAIL_PORT = 587 # os.environ.get("EMAIL_PORT")
+EMAIL_HOST = os.environ.get("EMAIL_HOST")
+EMAIL_USE_TLS = os.environ.get("EMAIL_USE_TLS")
+EMAIL_HOST_USER = os.environ.get("EMAIL_HOST_USER")
+EMAIL_HOST_PASSWORD = os.environ.get("EMAIL_HOST_PASSWORD")
+EMAIL_PORT = os.environ.get("EMAIL_PORT")
 
 django_heroku.settings(locals())
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
