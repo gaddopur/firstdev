@@ -8,12 +8,12 @@
 <div class="container my-3 ">
   <h2 class="blog-post-title text-center">{{article.title}}</h2>
   {% if user.is_authenticated and user == article.author %}
-      <a href="{% url 'articles:update' slug=article.slug %}" >
-        want to update?
-      </a>
-      <a href="{% url 'articles:delete' slug=article.slug %}" >
-        want to delete?
-      </a>
+      <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#editModal" data-content="delete">
+        Delete
+      </button>
+      <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#editModal" data-content="update">
+        Update
+      </button>
   {% endif %}
   <hr>
   <div style="overflow:auto">{{article.text|safe}}</div>
@@ -22,15 +22,27 @@
       {{article.author.name}}
     </a>
     <br>
-    {% if user.is_authenticated and user == article.author %}
-      <a href="{% url 'articles:update' slug=article.slug %}" >
-        want to update?
-      </a>
-      <a href="{% url 'articles:delete' slug=article.slug %}" >
-        want to delete?
-      </a>
-    {% endif %}
-  </p>
+</p>
+    <!-- Modal -->
+    <div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="editModalLabel">Delete</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <p class="par">Are you sure you want to edit?</p>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
+            <a href="{home}" class="button btn btn-primary" id="edit">Yes</a>
+          </div>
+        </div>
+      </div>
+    </div>
 </div>
 <br><hr>
 
@@ -53,7 +65,6 @@
 {% for comment in comments %}
   <div class="row my-1" style="margin-left:{{comment.height}}px;">
       <div class="col-2 col-md-1">
-       <!-- <img class="border border-dark w-100" src="{{comment.user.profile.profile_pic.url}}" alt="user"> -->
       </div>
       <div class="col-10 col-md-11">
         <b>{{comment.user}}</b> <span class="badge badge-secondary">{{comment.date|naturaltime}}</span>
@@ -85,5 +96,22 @@
   </div>
   {% endfor %}
 </div>
+{% endblock %}
 
+{% block js%}
+<script>
+  $('#editModal').on('show.bs.modal', function (event) {
+  var button = $(event.relatedTarget) // Button that triggered the modal
+  var content = button.data('content') // Extract info from data-* attributes
+  // If necessary, you could initiate an AJAX request here (and then do the updating in a callback).
+  // Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
+  var modal = $(this)
+  modal.find('.modal-title').text(content)
+  modal.find('.modal-body p').text('Are you sure you want to ' + content + ' ?')
+  if(content === 'update')
+  modal.find('#edit').attr('href', "{% url 'articles:update' slug=article.slug %}")
+  else 
+  modal.find('#edit').attr('href', "{% url 'articles:delete' slug=article.slug %}")
+});
+</script>
 {% endblock %}

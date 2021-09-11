@@ -58,19 +58,6 @@
       </ul>
     </div>
   </nav>
-  <!-- <nav style="background-color:#e9ecef;" class="mx-3" >
-    <ul class=" navbar mx-auto list-unstyled" >
-      <li class="nav-item"><a class="custom-link" href="{% url 'home'%}">
-        <i class="fa fa-home" aria-hidden="true"></i>Home</a>
-      </li>
-      <li class="nav-item"><a class="custom-link" href="{% url 'articles:articles_list'%}">
-        <i class="fa fa-file" aria-hidden="true"></i>Articles</a>
-      </li>
-      <li class="nav-item"><a class="custom-link" href="{% url 'articles:create'%}">
-        <i class="fa fa-pencil-square-o" aria-hidden="true"></i>New Article</a>
-      </li>
-    </ul>
-  </nav> -->
   {% for message in messages %}
   <div class="alert alert-{{message.tags}} alert-dismissible fade show mb-0" role="alert">
     <strong>Message: </strong> {{message}}
@@ -88,5 +75,7 @@
   <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
   <script>window.jQuery || document.write('<script src="/docs/4.4/assets/js/vendor/jquery.slim.min.js"><\/script>')</script><script src="https://getbootstrap.com/docs/4.4/dist/js/bootstrap.bundle.min.js" integrity="sha384-6khuMg9gaYr5AxOqhkVIODVIvm9ynTT5J4V1cfthmT+emCG6yVmEZsRHdxlotUnm" crossorigin="anonymous"></script>
+  {% block js%}
+  {% endblock %}
 </body>
 </html>

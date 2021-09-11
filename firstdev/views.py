@@ -7,9 +7,6 @@ def home(request):
     template = 'homepage.html'
     return render(request, template)
 
-def about(request):
-    return render(request, 'about.html')
-
 def search(request):
     template = "search.html"
     query = request.GET['query']

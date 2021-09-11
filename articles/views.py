@@ -1,9 +1,7 @@
 from django.contrib.auth.decorators import login_required
-from django.http import HttpResponse
 from django.shortcuts import render, redirect
-from django.urls import reverse
+from django.contrib import messages
 
-from articles.templatetags import extrafilter
 
 from .models import Article,  ArticleComment
 from . import utils
@@ -59,6 +57,7 @@ def article_create(request):
             instance.author = request.user
             instance.slug = utils.link_generator()
             instance.save()
+            messages.success(request, "Your article created sucessfully!")
             return redirect("articles:articles_list")
     else:
         form = forms.CreateArticle()
@@ -77,10 +76,11 @@ def article_update(request, slug):
         form = forms.CreateArticle(request.POST, instance=instance)
         if form.is_valid():
             form.save()
+            messages.success(request, "Your article updated sucessfully!")
             return redirect("articles:articles_list")
     else:
         form = forms.CreateArticle(instance=instance)
-        return render(request, "articles/article_create.html", 
+    return render(request, "articles/article_create.html", 
                         {'form':form, 'type': "Update"})
 
 
@@ -89,4 +89,5 @@ def article_delete(request, slug):
     instance = Article.objects.get(slug=slug)
     if request.user == instance.author:
         instance.delete()
+        messages.success(request, "Your article deleted sucessfully!")
     return redirect("articles:articles_list")
