@@ -3,9 +3,11 @@ from django.shortcuts import render
 from articles.models import Article
 from django.contrib import messages
 
+
 def home(request):
-    template = 'homepage.html'
-    return render(request, template)
+    articles = Article.objects.all().order_by('date')
+    articles = articles.reverse()
+    return render(request, 'articles/article_list.html', {'articles':articles})
 
 def search(request):
     template = "search.html"
