@@ -1,6 +1,6 @@
 from datetime import datetime
 from pytz import timezone 
-from django.http import HttpResponse
+from django.contrib import messages
 from django.shortcuts import redirect, render
 from django.core.mail import EmailMessage
 from django.contrib.auth.decorators import login_required
@@ -19,6 +19,7 @@ def request_meet(request):
             instance = form.save(commit=False)
             instance.attendee = request.user
             instance.save()
+            messages.success(request, "Your mock interview request has been sent to available interviwers someone will accept soon.")
             return redirect(request.user.get_absolute_url())
             
         # return redirect("meetings:requestmeet")
