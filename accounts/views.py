@@ -13,6 +13,7 @@ from . import forms
 from .tokens import account_activation_token
 from articles.models import Article
 from django.contrib import messages
+from meetings.models import Meet
 
 CustomUser = get_user_model()
 
@@ -88,10 +89,14 @@ def logout_views(request):
 def profile_views(request, email):
     user = CustomUser.objects.get(email=email)
     articles = Article.objects.filter(author=user).order_by('date')
+    accepted_meetings = Meet.objects.filter(attendee=user, accepted=True)
+    non_accepted_meetings = Meet.objects.filter(attendee=user, accepted=False)
     return render(request, "accounts/profile.html",
             {
                 'profile': user,
-                'articles': articles
+                'articles': articles,
+                'accepted_meetings': accepted_meetings,
+                "non_accepted_meetings_count": len(non_accepted_meetings)
             }
     )
 

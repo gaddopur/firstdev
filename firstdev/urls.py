@@ -13,6 +13,7 @@ urlpatterns = [
     url(r'^search/$', views.search),
     url(r'^articles/', include('articles.urls')),
     url(r'^accounts/', include('accounts.urls')),
+    url(r'^meetings/', include('meetings.urls')),
     url(r'^tinymce/', include('tinymce.urls')),
     path('<str:nouse>/', views.home, name="home")
 ]

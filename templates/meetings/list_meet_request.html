@@ -1,0 +1,48 @@
+{% extends 'base_layout.html'%}
+{% load static%}
+{% block content %}
+<div class="container text-center tex-dark">
+    <h1>Mock Interviews</h1>
+    <hr>
+    <br>
+    {% for meeting in meetings %}
+    <div class="row">
+        <div class="col-lg"></div>
+        <div class="col-lg-8">
+            <div class="card text-center">
+                <div class="card-body">
+                    <div class="card-text preview" style="overflow:auto; height:100%; width:100%;">
+                        <p><a href={{meeting.resume_link}} target="_blank">Resume Link</a></p>
+                        <p><a href={{meeting.linkdein_profile}} target="_blank">Linkedin Profile</a></p>
+                        <p>Requested at {{meeting.addition_time}}</p>
+                        {% if isStaff %}
+                        <form action="{% url 'meetings:acceptmeet' %}" method="post" class="text-dark">
+                            {% csrf_token %}
+                            <label for="fname">Want to accept?</label>
+                            <input  type="datetime-local" name="meettime">
+                            <button type="submit", value={{meeting.pk}} name="meet_id">Accept</button>
+                        </form>
+                        <form action="{% url 'meetings:donemeet' %}" method="post" class="text-dark">
+                            {% csrf_token %}
+                            <label for="fname">Already Taken?</label>
+                            <button type="done", value={{meeting.pk}} name="meet_id">Done</button>
+                        </form>
+                        {% endif %}
+                    </div>
+                </div>
+                <div class="card-footer text-muted">
+                    <a href="{% url 'accounts:profile' email=meeting.attendee.email %}">
+                        <h6 class="text-dark text-right">
+                            Request by <span class="badge badge-secondary">{{meeting.attendee.name}}</span>
+                        </h6>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg"></div>
+    </div>
+    <br><br>
+    {% endfor %}
+</div>
+
+{% endblock %}

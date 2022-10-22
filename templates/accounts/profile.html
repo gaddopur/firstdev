@@ -1,5 +1,5 @@
 {% extends 'base_layout.html' %}
-
+{% load humanize %}
 {% block content %}
 <div class="row m-4">
   <div class="col-md-6 col-12 border m-1">
@@ -35,6 +35,26 @@
   </div>
   <div class="col-md-5 col-12 border m-1">
     <div class="content m-2">
+      <div class="breadcrumb">
+        <h6>Mock Interviews</h6>
+      </div>
+      {% if accepted_meetings|length == 0 and non_accepted_meetings_count == 0 %}
+      <ul>
+        <li>You don't have any mock interview.</li>
+        <li>Request one <a href="{% url 'meetings:requestmeet' %}">
+            Mock Interview</a></li>
+      </ul>
+      {% endif %} 
+      <ul class="">
+        {% for meeting in accepted_meetings %}
+        <li>
+          <p>Scheduled Mock Interview for <b>{{meeting.type_of_meeting}}</b> at <b>{{meeting.addition_time}}</b></p>
+        </li>
+        {% endfor %}
+        {% if non_accepted_meetings_count > 0 %}
+        <li><p>you have {{non_accepted_meetings_count}} mock interview request waiting for some interviewer to accept. See the list <a href="{% url 'meetings:listrequestmeet' %}">here</a></p></li>
+        {% endif %}
+      </ul>
       <div class="breadcrumb">
         <h6>Articles</h6>
       </div>
