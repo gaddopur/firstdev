@@ -13,31 +13,26 @@
     <div class="col-lg-8">
       <div class="card text-center">
         <div class="card-body">
-          <h5 class="card-title">{{article.title}}</h5>
-          <div class="card-text preview" style="overflow:auto; height:100%; width:100%;">
-             {{article.text|truncatechars_html:500|safe}}
-         </div>
-        <p class="card-text my-2"><a href="{% url 'articles:details' slug=article.slug%}" class="btn btn-dark">
-          Continue reading...
-        </a></p>
+            <h5 class="card-title">{{article.title}}</h5>
+            <div class="card-text preview" style="overflow:auto; height:100%; width:100%;">
+              {{article.text|truncatechars_html:500|safe}}
+            </div>
+            <p class="card-text my-2"><a href="{% url 'articles:details' slug=article.slug%}" class="btn btn-dark">
+              Continue reading...
+            </a></p>
         </div>
         <div class="card-footer text-muted">
           {{article.date|naturaltime}}
           <a href="{% url 'accounts:profile' email=article.author.email %}">
           <h6 class="text-dark text-right">
             added by <span class="badge badge-secondary">{{article.author.name}}</span>
-          </h6>
-          </a>
+          </h6></a>
         </div>
       </div>
-      </div>
-      <div class="col-lg"></div>
     </div>
-    <br><br>
-    {% endfor %}
-   </div>
-
-
-<script src="{% static "preview.js" %}"></script>
-
+    <div class="col-lg"></div>
+  </div>
+  <br><br>
+  {% endfor %}
+</div>
 {% endblock %}

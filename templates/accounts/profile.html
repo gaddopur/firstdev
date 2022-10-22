@@ -22,14 +22,6 @@
             </div>
           </div>
         </li>
-        <!-- <li>
-          <div class="row">
-            <div class="col-6"><strong>Country:</strong></div>
-            <div class="col-6 ">
-              <small>{{profile.country}}</small>
-            </div>
-          </div>
-        </li> -->
       </ul>
     </div>
   </div>
@@ -64,7 +56,7 @@
         <li>Create <a href="{% url 'articles:create' %}">
           New Article</a></li>
       </ul>
-      <!-- <p class="blockquote-footer">You didn't write Article</p> -->
+      
       {% endif%}
       <ul class="">
         {% for article in articles %}
