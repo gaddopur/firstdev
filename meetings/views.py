@@ -8,7 +8,6 @@ from django.contrib.auth.decorators import login_required
 from meetings import forms
 
 from .models import Meet
-from firstdev.settings import MEET_START_TIME
 
 # Create your views here.
 
@@ -44,7 +43,7 @@ def list_request_meet(request):
 
 @login_required(login_url = "accounts:login")
 def accept_meet(request):
-    if not request.user.is_staff:
+    if request.user.is_staff:
         if request.method == "POST":
             meet_id = request.POST['meet_id']
             instance = Meet.objects.filter(pk=int(meet_id))
@@ -67,7 +66,7 @@ def accept_meet(request):
     
 @login_required(login_url = "accounts:login")
 def done_meet(request):
-    if not request.user.is_staff:
+    if request.user.is_staff:
         if request.method == "POST":
             meet_id = request.POST['meet_id']
             instance = Meet.objects.filter(pk=int(meet_id))
