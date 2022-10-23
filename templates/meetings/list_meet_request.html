@@ -15,7 +15,7 @@
                     <div class="card-text preview" style="overflow:auto; height:100%; width:100%;">
                         <p><b>{{meeting.type_of_meeting}}</b></p>
                         <p><a href={{meeting.resume_link}} target="_blank">Resume Link</a></p>
-                        <p><a href={{meeting.linkdein_profile}} target="_blank">Linkedin Profile</a></p>
+                        <p><a href={{meeting.linkedin_profile}} target="_blank">Linkedin Profile</a></p>
                         <p>Requested at {{meeting.addition_time}}</p>
                         {% if isStaff %}
                         <form action="{% url 'meetings:acceptmeet' %}" method="post" class="text-dark">
