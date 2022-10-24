@@ -65,15 +65,12 @@ def accept_meet(request):
 
                 # send email to interviewer
                 mail_subject = "Mock Interview with {name}".format(name=attendee.name)
-                message = "Hi {name} \n\nYou have accepted interview request of {attendee} on {type_of_meet} and scheduled at {meet_time} (IST).\nPlease send the google meet invite on his email below are details of interviewee.\n\nEmail: {email}\nResume Link: {resume_link}\nLinkedin Profile: {linkedin_profile} \n\nThank You!".format(type_of_meet=instance.type_of_meeting, attendee=attendee.name, meet_time=meet_time, name=request.user.name, email=attendee.email, linkedin_profile=instance.linkedin_profile, resume_link=instance.resume_link)
+                message = "Hi {name} \n\nYou have accepted interview request of {attendee} on {type_of_meet} and scheduled at {meet_time} (IST).\nPlease send the google meet invite, details of interviewee.\n\nEmail: {email}\nResume Link: {resume_link}\nLinkedin Profile: {linkedin_profile} \n\nThank You!".format(type_of_meet=instance.type_of_meeting, attendee=attendee.name, meet_time=meet_time, name=request.user.name, email=attendee.email, linkedin_profile=instance.linkedin_profile, resume_link=instance.resume_link)
                 to_email = request.user.email
                 email = EmailMessage(
                     mail_subject, message, to=[to_email]
                 )
                 email.send()
-                print(mail_subject)
-                print(message)
-                print(to_email)
                 instance.accepted = True
                 instance.save()
             return redirect("meetings:listrequestmeet")
