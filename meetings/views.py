@@ -34,10 +34,10 @@ def request_meet(request):
 def list_request_meet(request):
     isStaff = False
     if request.user.is_staff:
-        meetings = Meet.objects.all()
+        meetings = Meet.objects.filter(accepted=False)
         isStaff = True
     else:
-        meetings = Meet.objects.filter(attendee=request.user)
+        meetings = Meet.objects.filter(attendee=request.user, accepted=False)
 
     return render(request, "meetings/list_meet_request.html", 
             {'meetings':meetings, 'isStaff': isStaff})
@@ -53,6 +53,8 @@ def accept_meet(request):
                 attendee = instance.attendee
                 addition_time = instance.addition_time.astimezone(timezone("Asia/Kolkata")).ctime()
                 meet_time = datetime.strptime(request.POST["meettime"], '%Y-%m-%dT%H:%M').ctime()
+
+                # send email to interviewee
                 mail_subject = "Mock Interview with Gaddopur Coder"
                 message = "Hi {name} \n\nYour interview request on {type_of_meet} created at {addition_time} (IST) is accepted by {interviewer} and scheduled at {meet_time} (IST).\nYou will get google meet invite shortly. \n\nThank You!".format(type_of_meet=instance.type_of_meeting, addition_time=addition_time, interviewer=request.user.name, meet_time=meet_time, name=attendee.name)
                 to_email = attendee.email
@@ -60,7 +62,20 @@ def accept_meet(request):
                     mail_subject, message, to=[to_email]
                 )
                 email.send()
-                instance.delete()
+
+                # send email to interviewer
+                mail_subject = "Mock Interview with {name}".format(name=attendee.name)
+                message = "Hi {name} \n\nYou have accepted interview request of {attendee} on {type_of_meet} and scheduled at {meet_time} (IST).\nPlease send the google meet invite on his email below are details of interviewee.\n\nEmail: {email}\nResume Link: {resume_link}\nLinkedin Profile: {linkedin_profile} \n\nThank You!".format(type_of_meet=instance.type_of_meeting, attendee=attendee.name, meet_time=meet_time, name=request.user.name, email=attendee.email, linkedin_profile=instance.linkedin_profile, resume_link=instance.resume_link)
+                to_email = request.user.email
+                email = EmailMessage(
+                    mail_subject, message, to=[to_email]
+                )
+                email.send()
+                print(mail_subject)
+                print(message)
+                print(to_email)
+                instance.accepted = True
+                instance.save()
             return redirect("meetings:listrequestmeet")
 
     return redirect(request.user.get_absolute_url())
