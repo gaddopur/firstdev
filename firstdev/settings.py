@@ -36,6 +36,7 @@ INSTALLED_APPS = [
     'meetings',
     'crispy_forms',
     'tinymce',
+    'corsheaders',
 ]
 
 MIDDLEWARE = [
@@ -47,6 +48,8 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'whitenoise.middleware.WhiteNoiseMiddleware',
+    'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
 ]
 
 
@@ -144,3 +147,4 @@ EMAIL_PORT = os.environ.get("EMAIL_PORT")
 
 django_heroku.settings(locals())
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+CORS_ORIGIN_ALLOW_ALL = True
