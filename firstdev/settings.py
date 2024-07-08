@@ -16,7 +16,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = os.environ.get("SECRET_KEY")
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = ['gaddopurblog.herokuapp.com', 'localhost', '127.0.0.1', '0.0.0.0', "*"]
 
@@ -127,7 +127,7 @@ MEDIA_URL = '/media/'
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
 STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, "static", "static_root"),
+    os.path.join(BASE_DIR, "static"),
 ]
 
 MESSAGE_TAGS = {
